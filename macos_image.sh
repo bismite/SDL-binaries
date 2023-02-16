@@ -10,7 +10,7 @@ rm -rf /tmp/${SDL_IMAGE}
 tar zxf ${SDL_IMAGE}.tar.gz -C /tmp
 (
   cd /tmp/${SDL_IMAGE} ;
-  ./configure --prefix=${PREFIX} --enable-static=yes \
+  ./configure --prefix=${PREFIX} --enable-static=yes --disable-sdltest \
     CFLAGS="-O2 -g -arch arm64 -arch x86_64" \
     LDFLAGS="-arch arm64 -arch x86_64" ;
   make install
