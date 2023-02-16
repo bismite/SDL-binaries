@@ -1,0 +1,24 @@
+name: Build Mingw
+on:
+  push:
+    tags:
+      - 'mingw-*'
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Install dependencies
+        run: sudo apt-get install mingw-w64
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: mkdir -p mingw
+      - run: ./mingw_sdl.sh
+      - run: ./mingw_image.sh
+      - run: ./mingw_mixer.sh
+      - run: ./mingw_pack.sh
+      - name: Upload libs
+        uses: svenstaro/upload-release-action@2.4.1
+        with:
+          file: mingw/SDL.tgz
+          asset_name: SDL-${{github.ref_name}}.tgz
+          overwrite: true
