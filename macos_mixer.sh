@@ -3,10 +3,6 @@
 SDL_MIXER=SDL2_mixer-2.6.3
 PREFIX=$(pwd)/macos
 echo ${PREFIX}
-
-# search path
-export C_INCLUDE_PATH=${PREFIX}/include
-export LIBRARY_PATH=${PREFIX}/lib
 export PATH=${PREFIX}/bin:$PATH
 
 DISABLES="--disable-music-mod --disable-music-midi --disable-music-flac --disable-music-opus"
