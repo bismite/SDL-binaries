@@ -1,0 +1,6 @@
+linux/
+macos/
+emscripten/
+mingw/
+tmp/
+build/
