@@ -119,7 +119,6 @@ static SDL_Window* init_window()
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 #else
   SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
@@ -147,12 +146,25 @@ int main(int argc, char *argv[])
   init();
   SDL_Window* window = init_window();
 
-  // Image load
-  SDL_Renderer *render = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+  // Renderer
+  SDL_Renderer *render = SDL_CreateRenderer(window, -1, 0);
+  if(render==NULL){
+    printf("SDL_CreateRenderer failed: %s\n",SDL_GetError());
+  }
+  SDL_RendererInfo info;
+  SDL_GetRendererInfo(render,&info);
+  printf("Renderer %s\n", info.name);
+  if(info.flags&SDL_RENDERER_SOFTWARE) printf("SDL_RENDERER_SOFTWARE\n");
+  if(info.flags&SDL_RENDERER_ACCELERATED) printf("SDL_RENDERER_ACCELERATED\n");
+  if(info.flags&SDL_RENDERER_PRESENTVSYNC) printf("SDL_RENDERER_PRESENTVSYNC\n");
+  if(info.flags&SDL_RENDERER_TARGETTEXTURE) printf("SDL_RENDERER_TARGETTEXTURE\n");
+
+  // Image load and render
   SDL_Surface* img_png = IMG_Load(PNG_FILE);
   SDL_Surface* img_jpg = IMG_Load(JPG_FILE);
   if(img_png==NULL) { printf("png load failed\n"); }
   if(img_jpg==NULL) { printf("jpg load failed\n"); }
+  SDL_SetRenderDrawColor(render,0,0,0,0);
   SDL_RenderClear(render);
   SDL_Rect png_dst = {0,0,160,240};
   SDL_Rect jpg_dst = {160,0,160,240};
