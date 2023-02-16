@@ -18,9 +18,9 @@ jobs:
           path: ${{env.EM_CACHE_FOLDER}}
           key: ${{env.EM_VERSION}}-${{ runner.os }}
       - run: mkdir -p em
-      - run: ./em_sdl.sh
-      - run: ./em_image.sh
-      - run: ./em_mixer.sh
+      - run: ./em_sdl.rb
+      - run: ./em_image.rb
+      - run: ./em_mixer.rb
       - run: ./em_pack.sh
       - name: Upload libs
         uses: svenstaro/upload-release-action@2.4.1
