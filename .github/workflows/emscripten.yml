@@ -17,6 +17,10 @@ jobs:
         with:
           path: ${{env.EM_CACHE_FOLDER}}
           key: ${{env.EM_VERSION}}-${{ runner.os }}
+      - uses: mymindstorm/setup-emsdk@v11
+        with:
+          version: ${{env.EM_VERSION}}
+          actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
       - run: mkdir -p em
       - run: ./em_sdl.rb
       - run: ./em_image.rb
