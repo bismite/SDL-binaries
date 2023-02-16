@@ -1,9 +1,13 @@
 #!/bin/bash
 
+SDL="SDL2-2.26.3"
 mkdir -p linux/sdl
-rm -rf linux/SDL2-2.26.3
-tar xf SDL2-2.26.3.tar.gz -C linux
+rm -rf /tmp/${SDL}
+tar xf ${SDL}.tar.gz -C /tmp
 
-cmake -B linux/sdl linux/SDL2-2.26.3/ -DCMAKE_PREFIX_PATH=linux
+cmake -B linux/sdl /tmp/${SDL}/ -DCMAKE_PREFIX_PATH=linux
 cmake --build linux/sdl --parallel
 cmake --install linux/sdl --prefix linux
+
+mkdir -p linux/licenses
+cp /tmp/${SDL}/LICENSE.txt linux/licenses/${SDL}-LICENSE.txt
