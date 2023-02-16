@@ -1,0 +1,30 @@
+name: Build Emscripten
+on:
+  push:
+    tags:
+      - 'emscripten-*'
+env:
+  EM_VERSION: 3.1.31
+  EM_CACHE_FOLDER: 'emsdk-cache'
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup cache
+        id: cache-system-libraries
+        uses: actions/cache@v3
+        with:
+          path: ${{env.EM_CACHE_FOLDER}}
+          key: ${{env.EM_VERSION}}-${{ runner.os }}
+      - run: mkdir -p em
+      - run: ./em_sdl.sh
+      - run: ./em_image.sh
+      - run: ./em_mixer.sh
+      - run: ./em_pack.sh
+      - name: Upload libs
+        uses: svenstaro/upload-release-action@2.4.1
+        with:
+          file: em/SDL.tgz
+          asset_name: SDL-${{github.ref_name}}.tgz
+          overwrite: true

@@ -1,6 +1,6 @@
 linux/
 macos/
-emscripten/
+em/
 mingw/
 tmp/
 build/
