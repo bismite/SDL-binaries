@@ -17,4 +17,4 @@ tar zxf ${SDL_IMAGE}.tar.gz -C /tmp
 )
 
 mkdir -p macos/licenses
-cp /tmp/${SDL_IMAGE}/LICENSE.txt build/licenses/${SDL_IMAGE}-LICENSE.txt
+cp /tmp/${SDL_IMAGE}/LICENSE.txt macos/licenses/${SDL_IMAGE}-LICENSE.txt
