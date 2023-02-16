@@ -6,6 +6,8 @@
 #ifdef EMSCRIPTEN
 #include <GLES3/gl3.h>
 #include <emscripten.h>
+#else
+#include <SDL2/SDL_opengl.h>
 #endif
 
 #define PNG_FILE "assets/sample.png"
@@ -111,9 +113,17 @@ static void main_loop( void* arg )
 static SDL_Window* init_window()
 {
   SDL_SetHint(SDL_HINT_RENDER_DRIVER,"opengl");
+#if defined(__EMSCRIPTEN__)
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+#else
+  SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+#endif
 
   Uint32 flag = SDL_WINDOW_OPENGL;
   SDL_Window* window = SDL_CreateWindow(__FILE__, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 320, 240, flag);
@@ -162,7 +172,7 @@ int main(int argc, char *argv[])
   emscripten_set_main_loop_arg(main_loop, NULL, 0, false);
 #else
   while(1){
-    main_loop();
+    main_loop(NULL);
     SDL_Delay(20);
   }
 #endif

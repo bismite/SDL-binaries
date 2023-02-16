@@ -1,0 +1,21 @@
+name: Build Macos
+on:
+  push:
+    tags:
+      - 'macos-*'
+jobs:
+  build:
+    runs-on: macos-12
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: ./macos_sdl.sh
+      - run: ./macos_image.sh
+      - run: ./macos_mixer.sh
+      - run: ./macos_pack.sh
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2.4.1
+        with:
+          file: macos/SDL.tgz
+          asset_name: SDL-${{github.ref_name}}.tgz
+          overwrite: true
