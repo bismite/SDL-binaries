@@ -6,6 +6,7 @@
 #ifdef EMSCRIPTEN
 #include <GLES3/gl3.h>
 #include <emscripten.h>
+EM_JS_DEPS(sdl_deps, "$autoResumeAudioContext,$dynCall");
 #else
 #include <SDL2/SDL_opengl.h>
 #endif
