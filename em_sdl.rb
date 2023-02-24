@@ -68,7 +68,7 @@ mkdir_p "em/sdl"
 cmd "tar xf #{SDL}.tar.gz -C em"
 # header install
 mkdir_p "em/include/SDL2"
-Dir.glob("em/#{SDL}/include/*.h").each{|h| cp h, "em/include/SDL2"}
+Dir.glob("em/#{SDL}/include/*.h").each{|h| cp h, "em/include/SDL2" unless h =~ /SDL_test/ }
 # compile
 Dir.chdir("em/sdl"){
   (SRCS+THREAD_SRCS).each{|s|
