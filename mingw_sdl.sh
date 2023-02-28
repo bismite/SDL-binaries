@@ -1,14 +1,10 @@
 #!/bin/bash
-SDL=SDL2-2.26.3
+
+SDL_VERSION=2.26.3
 PREFIX=$(pwd)/mingw
 
-rm -rf /tmp/${SDL}
-tar xf ${SDL}.tar.gz -C /tmp
-
-(
-  cd /tmp/${SDL} ;
-  ./configure --prefix=${PREFIX} --host=x86_64-w64-mingw32
-  make install
-  mkdir -p ${PREFIX}/licenses
-  cp LICENSE.txt ${PREFIX}/licenses/${SDL}-LICENSE.txt
-)
+mkdir -p  mingw
+tar -C mingw --strip-components=2 -x -f SDL2-devel-${SDL_VERSION}-mingw.tar.gz SDL2-${SDL_VERSION}/x86_64-w64-mingw32
+tar -C mingw --strip-components=1 -x -f SDL2-${SDL_VERSION}.tar.gz SDL2-${SDL_VERSION}/LICENSE.txt
+mkdir -p mingw/licenses
+mv mingw/LICENSE.txt mingw/licenses/SDL-${SDL_VERSION}-LICENSE.txt

@@ -14,4 +14,6 @@ tar xf ${SDL_MIXER}.tar.gz -C /tmp
   make install
 )
 
+mkdir -p ${PREFIX}/licenses
 cp "/tmp/${SDL_MIXER}/LICENSE.txt" "${PREFIX}/licenses/${SDL_MIXER}-LICENSE.txt"
+x86_64-w64-mingw32-strip mingw/bin/SDL2_mixer.dll

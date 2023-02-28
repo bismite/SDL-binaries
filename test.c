@@ -2,6 +2,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 #ifdef EMSCRIPTEN
 #include <GLES3/gl3.h>

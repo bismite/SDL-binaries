@@ -1,4 +1,5 @@
 #!/bin/bash
+
 SDL_IMAGE=SDL2_image-2.6.3
 PREFIX=$(pwd)/mingw
 export PATH=${PREFIX}/bin:$PATH
@@ -14,4 +15,7 @@ tar xf ${SDL_IMAGE}.tar.gz -C /tmp
   make install
 )
 
+mkdir -p ${PREFIX}/licenses
 cp "/tmp/${SDL_IMAGE}/LICENSE.txt" "${PREFIX}/licenses/${SDL_IMAGE}-LICENSE.txt"
+x86_64-w64-mingw32-strip mingw/bin/SDL2_image.dll
+
