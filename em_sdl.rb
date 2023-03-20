@@ -2,6 +2,8 @@
 require "fileutils"
 include FileUtils
 
+SDL="SDL2-2.26.4"
+
 SRCS=%w(
   SDL.c SDL_assert.c SDL_dataqueue.c SDL_error.c SDL_guid.c SDL_hints.c SDL_list.c SDL_log.c SDL_utils.c
   atomic/SDL_atomic.c atomic/SDL_spinlock.c
@@ -61,7 +63,6 @@ def cmd(c)
   exit unless system(c)
 end
 
-SDL="SDL2-2.26.3"
 # clean and extract
 rm_rf ["em/#{SDL}", "em/sdl"]
 mkdir_p "em/sdl"

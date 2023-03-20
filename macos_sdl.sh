@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SDL=SDL2-2.26.3
+SDL="SDL2-2.26.4"
 PREFIX=$(pwd)/macos
 echo ${PREFIX}
 
