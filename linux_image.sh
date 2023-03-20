@@ -1,11 +1,10 @@
 #!/bin/bash
-
+set -e
 SDL_IMAGE="SDL2_image-2.6.3"
 export PATH=$(pwd)/linux/bin:$PATH
-mkdir -p linux/sdl_image
+
 rm -rf /tmp/${SDL_IMAGE}
 tar xf ${SDL_IMAGE}.tar.gz -C /tmp
-
 cmake -B linux/sdl_image /tmp/${SDL_IMAGE} -DCMAKE_PREFIX_PATH=linux -DSDL2_DIR=linux \
   -DSDL2IMAGE_BACKEND_STB=ON -DSDL2IMAGE_PNG=ON -DSDL2IMAGE_JPG=ON \
   -DSDL2IMAGE_AVIF=OFF -DSDL2IMAGE_BMP=OFF -DSDL2IMAGE_GIF=OFF \

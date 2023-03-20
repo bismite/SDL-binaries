@@ -1,20 +1,32 @@
 #!/bin/bash
-
+set -e
 SDL_IMAGE=SDL2_image-2.6.3
-PREFIX=$(pwd)/macos
+ARCH=$1
+PREFIX="$(pwd)/macos-${ARCH}"
+export PATH=${PREFIX}/bin:$PATH
 echo ${PREFIX}
 
-export PATH=$PATH:${PREFIX}/bin
-
 rm -rf /tmp/${SDL_IMAGE}
+rm -rf ${PREFIX}/sdl_image
 tar zxf ${SDL_IMAGE}.tar.gz -C /tmp
-(
-  cd /tmp/${SDL_IMAGE} ;
-  ./configure --prefix=${PREFIX} --enable-static=yes --disable-sdltest \
-    CFLAGS="-O2 -g -arch arm64 -arch x86_64" \
-    LDFLAGS="-arch arm64 -arch x86_64" ;
-  make install
-)
 
-mkdir -p macos/licenses
-cp /tmp/${SDL_IMAGE}/LICENSE.txt macos/licenses/${SDL_IMAGE}-LICENSE.txt
+for i in  ON OFF
+do
+  cmake -B ${PREFIX}/sdl_image /tmp/${SDL_IMAGE}/ \
+    -DBUILD_SHARED_LIBS=${i} \
+    -DCMAKE_OSX_ARCHITECTURES=${ARCH} -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+    -DCMAKE_BUILD_TYPE=Release -DSDL2IMAGE_SAMPLES=OFF -DSDL2IMAGE_TESTS_INSTALL=OFF -DSDL2IMAGE_VENDORED=OFF \
+    -DCMAKE_PREFIX_PATH=${PREFIX} -DSDL2_DIR=${PREFIX} \
+    -DSDL2IMAGE_BACKEND_IMAGEIO=OFF \
+    -DSDL2IMAGE_BACKEND_STB=ON -DSDL2IMAGE_PNG=ON -DSDL2IMAGE_JPG=ON \
+    -DSDL2IMAGE_AVIF=OFF -DSDL2IMAGE_BMP=OFF -DSDL2IMAGE_GIF=OFF \
+    -DSDL2IMAGE_JXL=OFF  -DSDL2IMAGE_LBM=OFF -DSDL2IMAGE_PCX=OFF \
+    -DSDL2IMAGE_PNM=OFF  -DSDL2IMAGE_QOI=OFF -DSDL2IMAGE_SVG=OFF \
+    -DSDL2IMAGE_TGA=OFF  -DSDL2IMAGE_TIF=OFF -DSDL2IMAGE_WEBP=OFF \
+    -DSDL2IMAGE_XCF=OFF  -DSDL2IMAGE_XPM=OFF -DSDL2IMAGE_XV=OFF
+  cmake --build ${PREFIX}/sdl_image --config Release --parallel
+  cmake --install ${PREFIX}/sdl_image --prefix ${PREFIX}
+done
+
+mkdir -p ${PREFIX}/licenses
+cp /tmp/${SDL_IMAGE}/LICENSE.txt ${PREFIX}/licenses/${SDL_IMAGE}-LICENSE.txt
