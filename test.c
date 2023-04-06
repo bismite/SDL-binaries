@@ -26,7 +26,10 @@ static void print_version(const char* name,const SDL_version *v)
 
 static void init()
 {
-  SDL_Init(SDL_INIT_VIDEO);
+  if( SDL_Init(SDL_INIT_VIDEO) != 0 ) {
+    printf("SDL_Init failed : %s\n",SDL_GetError());
+    exit(1);
+  }
 
   SDL_version v;
   SDL_VERSION(&v);
@@ -63,11 +66,24 @@ static void init()
 static void mixer_init()
 {
   printf("open_audio\n");
+
+  int n = SDL_GetNumAudioDrivers();
+  for(int i=0;i<n;i++){
+    printf("Audio Driver %d : %s\n",i,SDL_GetAudioDriver(i) );
+  }
+
   Mix_Init(MIX_INIT_MP3|MIX_INIT_OGG);
-  if( Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096) == 0 ){
+  if( Mix_OpenAudioDevice(48000, AUDIO_F32SYS, MIX_DEFAULT_CHANNELS, 4096, NULL, SDL_AUDIO_ALLOW_ANY_CHANGE) == 0 ){
     printf("Mix_OpenAudio succeeded.\n");
   }else{
     printf("Mix_OpenAudio failed.\n");
+  }
+  printf("Current Audio Driver : %s\n", SDL_GetCurrentAudioDriver() );
+  int a_freq;
+  Uint16 a_format;
+  int a_channels;
+  if( Mix_QuerySpec(&a_freq,&a_format,&a_channels) == 1 ) {
+    printf("Freq:%d Format:0x%x Channel:%d\n",a_freq,a_format,a_channels);
   }
   int channels = Mix_AllocateChannels(16);
   printf("%d channels allocated\n", channels);
@@ -119,11 +135,13 @@ static SDL_Window* init_window()
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
-#else
+#elif defined(__APPLE__)
   SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+#else
+  SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 #endif
 
   Uint32 flag = SDL_WINDOW_OPENGL;
