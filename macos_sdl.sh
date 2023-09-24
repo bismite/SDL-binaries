@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-SDL="SDL2-2.26.5"
+SDL="SDL2-2.28.3"
 ARCH=$1
 PREFIX="$(pwd)/macos-${ARCH}"
 echo ${PREFIX}

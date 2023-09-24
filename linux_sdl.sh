@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SDL="SDL2-2.26.5"
+SDL="SDL2-2.28.3"
 mkdir -p linux/sdl
 rm -rf /tmp/${SDL}
 tar xf ${SDL}.tar.gz -C /tmp

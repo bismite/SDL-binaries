@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SDL_VERSION="2.26.5"
+SDL_VERSION="2.28.3"
 PREFIX=$(pwd)/mingw
 
 mkdir -p  mingw

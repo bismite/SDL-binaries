@@ -2,7 +2,7 @@
 require "fileutils"
 include FileUtils
 
-SDL="SDL2-2.26.5"
+SDL="SDL2-2.28.3"
 
 SRCS=%w(
   SDL.c SDL_assert.c SDL_dataqueue.c SDL_error.c SDL_guid.c SDL_hints.c SDL_list.c SDL_log.c SDL_utils.c
