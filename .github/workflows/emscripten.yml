@@ -4,7 +4,7 @@ on:
     tags:
       - 'emscripten-*'
 env:
-  EM_VERSION: 3.1.35
+  EM_VERSION: 3.1.46
   EM_CACHE_FOLDER: 'emsdk-cache'
 jobs:
   build:
