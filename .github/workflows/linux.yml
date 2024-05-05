@@ -13,14 +13,13 @@ jobs:
           sudo apt install libgl-dev clang cmake libpulse-dev libpipewire-0.3-dev
       - name: Check out repository code
         uses: actions/checkout@v3
-      - run: mkdir -p linux
-      - run: ./linux_sdl.sh
-      - run: ./linux_image.sh
-      - run: ./linux_mixer.sh
-      - run: ./linux_pack.sh
+      - run: ./linux/sdl.sh
+      - run: ./linux/image.sh
+      - run: ./linux/mixer.sh
+      - run: ./linux/pack.sh
       - name: Upload libs
         uses: svenstaro/upload-release-action@2.4.1
         with:
-          file: linux/SDL.tgz
+          file: tmp/linux/SDL.tgz
           asset_name: SDL-${{github.ref_name}}.tgz
           overwrite: true
