@@ -4,7 +4,7 @@ on:
     tags:
       - 'emscripten-*'
 env:
-  EM_VERSION: 3.1.46
+  EM_VERSION: 3.1.59
   EM_CACHE_FOLDER: 'emsdk-cache'
 jobs:
   build:
@@ -17,18 +17,17 @@ jobs:
         with:
           path: ${{env.EM_CACHE_FOLDER}}
           key: ${{env.EM_VERSION}}-${{ runner.os }}
-      - uses: mymindstorm/setup-emsdk@v12
+      - uses: mymindstorm/setup-emsdk@v14
         with:
           version: ${{env.EM_VERSION}}
           actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
-      - run: mkdir -p em
-      - run: ./em_sdl.rb
-      - run: ./em_image.rb
-      - run: ./em_mixer.rb
-      - run: ./em_pack.sh
+      - run: ./emscripten/sdl.rb
+      - run: ./emscripten/image.rb
+      - run: ./emscripten/mixer.rb
+      - run: ./emscripten/pack.sh
       - name: Upload libs
         uses: svenstaro/upload-release-action@2.4.1
         with:
-          file: em/SDL.tgz
+          file: tmp/emscripten/SDL.tgz
           asset_name: SDL-${{github.ref_name}}.tgz
           overwrite: true

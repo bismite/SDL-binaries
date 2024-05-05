@@ -52,6 +52,7 @@ static void init()
   if(i&MIX_INIT_OGG) printf("MIX_INIT_OGG\n");
   if(i&MIX_INIT_MID) printf("MIX_INIT_MID\n");
   if(i&MIX_INIT_OPUS) printf("MIX_INIT_OPUS\n");
+  if(i&MIX_INIT_WAVPACK) printf("MIX_INIT_WAVPACK\n");
 
   flag = IMG_INIT_JPG|IMG_INIT_PNG|IMG_INIT_TIF|IMG_INIT_WEBP|IMG_INIT_JXL|IMG_INIT_AVIF;
   i=IMG_Init(flag);
