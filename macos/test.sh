@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
-PREFIX="$(pwd)/tmp/macos"
+PREFIX="$(pwd)/tmp/test/macos"
+mkdir -p ${PREFIX}
 cp -R assets ${PREFIX}/
+tar xf tmp/macos/SDL.tgz -C ${PREFIX}
 
 # shared
 clang -Wall -std=c11 -O3 test.c -o ${PREFIX}/test \

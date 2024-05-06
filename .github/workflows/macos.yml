@@ -8,13 +8,13 @@ jobs:
     runs-on: macos-14
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - run: ./macos/sdl.sh arm64
       - run: ./macos/image.sh arm64
       - run: ./macos/mixer.sh arm64
       - run: ./macos/pack.sh arm64
       - name: Upload binaries to release
-        uses: svenstaro/upload-release-action@2.4.1
+        uses: svenstaro/upload-release-action@2.9.0
         with:
           file: tmp/macos/SDL.tgz
           asset_name: SDL-${{github.ref_name}}.tgz
