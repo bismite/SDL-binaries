@@ -1,11 +1,14 @@
 #!/bin/bash
 set -e
-PREFIX="$(pwd)/tmp/mingw"
+PREFIX="$(pwd)/tmp/test/mingw"
+mkdir -p ${PREFIX}
 cp -R assets ${PREFIX}/
+tar xf tmp/mingw/SDL.tgz -C ${PREFIX}
 
 x86_64-w64-mingw32-gcc -Wall -std=c11 -O3 test.c -o ${PREFIX}/test \
   -L ${PREFIX}/bin -L ${PREFIX}/lib -I ${PREFIX}/include \
   -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lopengl32
+cp ${PREFIX}/bin/*.dll ${PREFIX}
 
 x86_64-w64-mingw32-gcc -Wall -std=c11 -g0 -O3 -flto test.c -o ${PREFIX}/test-static \
   -L ${PREFIX}/lib -I ${PREFIX}/include \
