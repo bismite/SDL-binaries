@@ -2,7 +2,8 @@
 require "fileutils"
 include FileUtils
 
-SDL_IMAGE="SDL2_image-2.8.2"
+VERSION=ARGV[0]
+SDL_IMAGE="SDL2_image-#{VERSION}"
 SRC_DIR="/tmp/#{SDL_IMAGE}"
 BUILD_DIR="tmp/build/emscripten/#{SDL_IMAGE}"
 PREFIX="#{Dir.pwd}/tmp/emscripten"

@@ -21,5 +21,5 @@ jobs:
         uses: svenstaro/upload-release-action@2.9.0
         with:
           file: tmp/macos/SDL.tgz
-          asset_name: SDL2-${{env.SDL_VERSION}}-SDL2_image-${{env.SDL_IMAGE_VERSION}}-SDL2_mixer-${{env.SDL_MIXER_VERSION}}-${{github.ref_name}}.tgz
+          asset_name: ${{github.ref_name}}-SDL2-${{env.SDL_VERSION}}-SDL2_image-${{env.SDL_IMAGE_VERSION}}-SDL2_mixer-${{env.SDL_MIXER_VERSION}}.tgz
           body: SDL2-${{env.SDL_VERSION}}, SDL2_image-${{env.SDL_IMAGE_VERSION}}, SDL2_mixer-${{env.SDL_MIXER_VERSION}}

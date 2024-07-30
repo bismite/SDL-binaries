@@ -2,7 +2,8 @@
 require "fileutils"
 include FileUtils
 
-SDL_MIXER="SDL2_mixer-2.8.0"
+VERSION=ARGV[0]
+SDL_MIXER="SDL2_mixer-#{VERSION}"
 SRC_DIR="/tmp/#{SDL_MIXER}"
 BUILD_DIR="tmp/build/emscripten/#{SDL_MIXER}"
 PREFIX="#{Dir.pwd}/tmp/emscripten"

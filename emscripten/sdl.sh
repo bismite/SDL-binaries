@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
-SDL="SDL2-2.30.3"
+
+VERSION=$1
+SDL="SDL2-${VERSION}"
 SRC_DIR="/tmp/${SDL}"
 BUILD_DIR="tmp/build/emscripten/${SDL}"
 PREFIX="$(pwd)/tmp/emscripten"
