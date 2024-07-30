@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
-SDL_IMAGE=SDL2_image-2.8.2
+VERSION=$1
+SDL_IMAGE=SDL2_image-${VERSION}
 SRC_DIR="/tmp/${SDL_IMAGE}"
 BUILD_DIR="tmp/build/macos/${SDL_IMAGE}"
 PREFIX="$(pwd)/tmp/macos"
