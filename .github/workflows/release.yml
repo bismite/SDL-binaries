@@ -22,7 +22,6 @@ jobs:
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@2.9.0
         with:
-          draft: true
           file: tmp/macos/SDL.tgz
           asset_name: macos-${{github.ref_name}}-SDL2-${{env.SDL_VERSION}}-SDL2_image-${{env.SDL_IMAGE_VERSION}}-SDL2_mixer-${{env.SDL_MIXER_VERSION}}.tgz
   linux:
@@ -45,7 +44,6 @@ jobs:
       - name: Upload libs
         uses: svenstaro/upload-release-action@2.9.0
         with:
-          draft: true
           file: tmp/linux/SDL.tgz
           asset_name: linux-${{github.ref_name}}-SDL2-${{env.SDL_VERSION}}-SDL2_image-${{env.SDL_IMAGE_VERSION}}-SDL2_mixer-${{env.SDL_MIXER_VERSION}}.tgz
   mingw:
@@ -64,7 +62,6 @@ jobs:
       - name: Upload libs
         uses: svenstaro/upload-release-action@2.9.0
         with:
-          draft: true
           file: tmp/mingw/SDL.tgz
           asset_name: mingw-${{github.ref_name}}-SDL2-${{env.SDL_VERSION}}-SDL2_image-${{env.SDL_IMAGE_VERSION}}-SDL2_mixer-${{env.SDL_MIXER_VERSION}}.tgz
   emscripten:
@@ -88,6 +85,5 @@ jobs:
       - name: Upload libs
         uses: svenstaro/upload-release-action@2.9.0
         with:
-          draft: true
           file: tmp/emscripten/SDL.tgz
           asset_name: emscripten-${{env.EM_VERSION}}-${{github.ref_name}}-${{github.ref_name}}-SDL2-${{env.SDL_VERSION}}-SDL2_image-${{env.SDL_IMAGE_VERSION}}-SDL2_mixer-${{env.SDL_MIXER_VERSION}}.tgz
