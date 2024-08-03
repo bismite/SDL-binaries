@@ -1,6 +1,7 @@
 #!/bin/bash
-
-SDL="SDL2-2.30.3"
+set -e
+VERSION=$1
+SDL="SDL2-${VERSION}"
 SRC_DIR="/tmp/${SDL}"
 BUILD_DIR="tmp/build/linux/${SDL}"
 PREFIX="$(pwd)/tmp/linux"

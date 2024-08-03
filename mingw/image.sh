@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
-
-SDL_IMAGE=SDL2_image-2.8.2
+VERSION=$1
+SDL_IMAGE=SDL2_image-${VERSION}
 PREFIX=$(pwd)/tmp/mingw
 export PATH=${PREFIX}/bin:$PATH
 

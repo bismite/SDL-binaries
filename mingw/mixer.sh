@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
-
-SDL_MIXER=SDL2_mixer-2.8.0
+VERSION=$1
+SDL_MIXER=SDL2_mixer-${VERSION}
 PREFIX=$(pwd)/tmp/mingw
 export PATH=${PREFIX}/bin:$PATH
 

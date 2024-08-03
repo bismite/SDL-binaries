@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
-SDL_MIXER=SDL2_mixer-2.8.0
+VERSION=$1
+SDL_MIXER=SDL2_mixer-${VERSION}
 SRC_DIR="/tmp/${SDL_MIXER}"
 BUILD_DIR="tmp/build/linux/${SDL_MIXER}"
 PREFIX="$(pwd)/tmp/linux"
