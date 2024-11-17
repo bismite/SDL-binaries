@@ -4,10 +4,10 @@ on:
     tags:
       - "*"
 env:
-  SDL_VERSION: 2.30.5
+  SDL_VERSION: 2.30.9
   SDL_IMAGE_VERSION: 2.8.2
   SDL_MIXER_VERSION: 2.8.0
-  EM_VERSION: 3.1.64
+  EM_VERSION: 3.1.71
   EM_CACHE_FOLDER: emsdk-cache
 jobs:
   macos:
